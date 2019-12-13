@@ -57,4 +57,4 @@ const Stack = createAppContainer(createStackNavigator({
     },
 }))
 
-// export default createAppContainer(Stack);
+export default createAppContainer(Stack);
