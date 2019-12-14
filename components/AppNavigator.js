@@ -1,5 +1,6 @@
 import DeckList from './DeckList'
 import AddDesk from './AddDesk'
+import Deck from './Deck'
 import { purple, white } from '../utils/colors'
 import { Platform } from 'react-native'
 import { 
@@ -53,8 +54,17 @@ const Stack = createAppContainer(createStackNavigator({
       screen: TabNav,
       navigationOptions: {
         header: null,
-      }
+      },
     },
+    Deck: {
+      screen: Deck,
+      navigationOptions: {
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: purple,
+        }
+      },
+    }
 }))
 
 export default createAppContainer(Stack);
