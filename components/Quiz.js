@@ -20,11 +20,25 @@ class Quiz extends Component {
         }))
     }
 
+    answer = (answer) => {
+        if (answer) {
+            this.setState((prevState) => ({
+                counter: prevState.counter + 1,
+                correct: prevState.correct + 1
+            }))
+        }
+        else if (!answer) {
+            this.setState((prevState) => ({
+                counter: prevState.counter + 1,
+                incorrect: prevState.incorrect + 1
+            }))
+        }
+    }
+
     render () {
         const { deck } = this.props
         const { counter, correct, incorrect, showAnswer } = this.state
         const questionCount = deck.questions.length
-        console.log('showAnswer',showAnswer)
 
         if (questionCount === 0) {
             return (
@@ -54,6 +68,16 @@ class Quiz extends Component {
                     <Text>
                         {showAnswer === true ? 'Question' : 'Answer'}
                     </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => this.answer(true)}
+                >
+                    <Text>Correct</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => this.answer(false)}
+                >
+                    <Text>Incorrect</Text>
                 </TouchableOpacity>
             </View>
         )
