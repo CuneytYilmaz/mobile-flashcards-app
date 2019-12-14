@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Result from './Result'
 import { connect } from 'react-redux'
 import {
     View,
@@ -35,6 +36,31 @@ class Quiz extends Component {
         }
     }
 
+    handleRestart = () => {
+        const { deckId } = this.props
+
+        this.setState({ 
+            counter: 0,
+            correct: 0,
+            incorrect: 0,
+            showAnswer: false,
+        })
+
+        this.props.navigation.navigate(
+            'Quiz',
+            { deckId: deckId }
+        )
+    }
+
+    handleBack = () => {
+        const { deckId } = this.props
+
+        this.props.navigation.navigate(
+            'Deck',
+            { deckId: deckId }
+        )
+    }
+
     render () {
         const { deck } = this.props
         const { counter, correct, incorrect, showAnswer } = this.state
@@ -50,9 +76,13 @@ class Quiz extends Component {
 
         if (questionCount === counter) {
             return (
-                <View>
-                    <Text>Result</Text>
-                </View>
+                <Result 
+                    correct={correct} 
+                    incorrect={incorrect} 
+                    questionCount={questionCount} 
+                    handleRestart={this.handleRestart}
+                    handleBack={this.handleBack}
+                />
             )
         }
 
