@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
-import { purple, test } from '../utils/colors'
+import { purple, lightPurp, white, black } from '../utils/colors'
 import { handleSaveDeckTitle } from '../actions'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 import {
     View,
     Text,
     TextInput,
     StyleSheet,
     TouchableOpacity,
-    Platform
+    Platform,
+    KeyboardAvoidingView
 } from 'react-native'
 
 class AddDesk extends Component {
@@ -29,60 +31,91 @@ class AddDesk extends Component {
         dispatch(handleSaveDeckTitle(input))
             .then(() => this.setState({ input: '' }))
 
-        // Navigate to Deck
+        this.props.navigation.dispatch(NavigationActions.back({
+            key: 'AddDesk'
+        }))
     }
 
     render () {
         const { input } = this.state
 
         return (
-            <View>
-                <Text>What is the title of your new deck?</Text>
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
+                <Text style={styles.title}>What is the title of your new deck?</Text>
                 <TextInput
                     value={input}
                     style={styles.input}
                     onChangeText={this.handleTextChange}
                 />
-
-                <TouchableOpacity
-                    style={ Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn }
-                    onPress={this.handleSubmit}
-                >
-                    <Text>Create Deck</Text>
-                </TouchableOpacity>
-            </View>
+                <View style={styles.btnContainer}>
+                    <TouchableOpacity
+                        style={ Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn }
+                        onPress={this.handleSubmit}
+                        disabled={input === ''}
+                    >
+                        <Text style={styles.btnText}>Create Deck</Text>
+                    </TouchableOpacity>
+                </View>
+                
+            </KeyboardAvoidingView>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: lightPurp,
+    },
+    title: {
+        fontSize: Platform.OS === 'ios' ? 40 : 30,
+        textAlign: 'center',
+        marginTop: 40,
+    },
     input: {
-        width: 300,
+        width: 330,
         height: 44,
         padding: 8,
         borderWidth: 1,
         borderColor: '#757575',
         margin: 50,
+        backgroundColor: white,
+        alignItems: 'center'
+    },
+    btnContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
     },
     iosSubmitBtn: {
-        backgroundColor: purple,
+        backgroundColor: black,
         padding: 10,
         borderRadius: 7,
-        height: 45,
+        height: 65,
+        width: 300,
         marginLeft: 40,
         marginRight: 40,
+        marginBottom: 80,
+        justifyContent: 'center',
     },
     androidSubmitBtn: {
-        backgroundColor: purple,
+        backgroundColor: black,
         padding: 10,
         paddingLeft: 30,
         paddingRight: 30,
-        height: 45,
+        height: 60,
         borderRadius: 2,
+        marginLeft: 40,
+        marginRight: 40,
+        marginBottom: 90,
         alignSelf: 'flex-end',
-        alignItems: 'center',
         justifyContent: 'center',
     },
+    btnText: {
+        color: white,
+        textAlign: 'center',
+        fontSize: 15,
+    }
 })
 
 export default connect()(AddDesk)

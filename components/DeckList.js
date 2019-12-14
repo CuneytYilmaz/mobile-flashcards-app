@@ -76,12 +76,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        flex:1,
         fontSize: 35,
         marginBottom: 7,
     },
     cardCount: {
-        flex: 1,
         fontSize: 17,
         color: gray,
     }
