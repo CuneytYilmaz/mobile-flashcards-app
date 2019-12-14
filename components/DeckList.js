@@ -37,7 +37,7 @@ class DeckList extends Component {
     handlePress = (title) => {
         this.props.navigation.navigate(
             'Deck',
-            { deskId: title}
+            { deckId: title}
         )
     }
 
