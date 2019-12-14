@@ -1,3 +1,4 @@
+import React from 'react'
 import DeckList from './DeckList'
 import AddDesk from './AddDesk'
 import AddCard from './AddCard'
@@ -5,6 +6,7 @@ import Deck from './Deck'
 import Quiz from './Quiz'
 import { purple, white } from '../utils/colors'
 import { Platform } from 'react-native'
+import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 import { 
     createAppContainer, 
     createStackNavigator, 
@@ -17,14 +19,14 @@ const Tabs = {
         screen: DeckList,
         navigationOptions: {
             tabBarLabel: 'Decks',
-            // tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+            tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={35} color={tintColor} />
         },
     },
     AddDesk: {
         screen: AddDesk,
         navigationOptions: {
             tabBarLabel: 'Add Desk',
-            // tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+            tabBarIcon: ({ tintColor }) => <MaterialIcons name='add-box' size={35} color={tintColor} />
         },
     },
 }
