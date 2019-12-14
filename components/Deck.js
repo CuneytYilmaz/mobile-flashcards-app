@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { handleDeleteDeck } from '../actions'
 import { connect } from 'react-redux'
 import {
     View,
@@ -20,9 +21,29 @@ class Deck extends Component {
             { deckId: title }
         )
     }
+    
+    deleteDeck = (deckId) => {
+        const { dispatch, navigation } = this.props
+
+        dispatch(handleDeleteDeck(deckId))
+        this.setState({
+            question: '',
+            answer: '',
+        })
+
+        navigation.navigate('DeckList')
+    }
 
     render () {
         const { deckId, deck } = this.props
+        
+        // This block will be fixed
+        if(deck === undefined || deck === null){
+            return(
+              <View>
+              </View>
+            )
+          }
 
         return (
             <View>
@@ -37,6 +58,13 @@ class Deck extends Component {
                     onPress={() => this.toStartQuiz(deckId)}
                 >
                     <Text>Start Quiz</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => this.deleteDeck(deckId)}
+                >
+                    <Text>
+                        Delete Deck
+                    </Text>
                 </TouchableOpacity>
             </View>
         )

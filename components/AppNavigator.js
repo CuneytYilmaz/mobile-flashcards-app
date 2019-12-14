@@ -1,5 +1,6 @@
 import DeckList from './DeckList'
 import AddDesk from './AddDesk'
+import AddCard from './AddCard'
 import Deck from './Deck'
 import { purple, white } from '../utils/colors'
 import { Platform } from 'react-native'
@@ -64,7 +65,16 @@ const Stack = createAppContainer(createStackNavigator({
           backgroundColor: purple,
         }
       },
-    }
+    },
+    AddCard: {
+      screen: AddCard,
+      navigationOptions: {
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: purple,
+        }
+      },
+    },
 }))
 
 export default createAppContainer(Stack);

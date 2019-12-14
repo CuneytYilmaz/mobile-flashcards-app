@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { purple } from '../utils/colors'
-import { handleSaveDeckTitle, getDecks } from '../actions'
+import { handleSaveDeckTitle } from '../actions'
 import { connect } from 'react-redux'
 import {
     View,
@@ -13,7 +13,7 @@ import {
 
 class AddDesk extends Component {
     state = {
-        input: 'test',
+        input: '',
     }
 
     handleTextChange = (input) => {

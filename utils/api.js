@@ -19,3 +19,14 @@ export const _saveDeckTitle = async(title) => {
 
     return await _getDecks()
 }
+
+export const _deleteDeck = async(deckId) => {
+    const decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
+
+    const data = JSON.parse(decks)
+    data[deckId] = undefined
+    delete data[deckId]
+    await AsyncStorage.setItem(DECKS_STORAGE_KEY,JSON.stringify(data))
+
+    return await _getDecks()
+}

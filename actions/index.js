@@ -1,5 +1,5 @@
 import { GET_DECKS } from './types'
-import { _saveDeckTitle, _getDecks } from '../utils/api'
+import { _saveDeckTitle, _getDecks, _deleteDeck } from '../utils/api'
 
 export function getDecks (decks) {
     return {
@@ -20,6 +20,15 @@ export function handleSaveDeckTitle (title) {
 export function handleInitialData () {
     return (dispatch) => {
         return _getDecks()
+            .then((decks) => {
+                dispatch(getDecks(decks))
+            })
+    }
+}
+
+export function handleDeleteDeck (deckId) {
+    return (dispatch) => {
+        return _deleteDeck(deckId)
             .then((decks) => {
                 dispatch(getDecks(decks))
             })

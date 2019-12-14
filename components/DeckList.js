@@ -10,7 +10,7 @@ import {
 
 class DeckList extends Component {
     state = {
-        ready: false,
+        ready: true,
     }
 
     componentDidMount() {
@@ -43,6 +43,7 @@ class DeckList extends Component {
 
     render () {
         const { decks } = this.props
+        console.log('render DeckList;',decks)
 
         return (
             <View style={{ flex: 1 }}>
