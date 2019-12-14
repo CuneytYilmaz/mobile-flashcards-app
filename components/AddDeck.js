@@ -32,7 +32,7 @@ class AddDesk extends Component {
             .then(() => this.setState({ input: '' }))
 
         this.props.navigation.dispatch(NavigationActions.back({
-            key: 'AddDesk'
+            key: 'AddDeck'
         }))
     }
 
@@ -46,6 +46,7 @@ class AddDesk extends Component {
                     value={input}
                     style={styles.input}
                     onChangeText={this.handleTextChange}
+                    placeholder='DeckTitle'
                 />
                 <View style={styles.btnContainer}>
                     <TouchableOpacity
@@ -78,6 +79,7 @@ const styles = StyleSheet.create({
         padding: 8,
         borderWidth: 1,
         borderColor: '#757575',
+        borderRadius: 4,
         margin: 50,
         backgroundColor: white,
         alignItems: 'center'

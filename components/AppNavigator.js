@@ -1,6 +1,6 @@
 import React from 'react'
 import DeckList from './DeckList'
-import AddDesk from './AddDesk'
+import AddDeck from './AddDeck'
 import AddCard from './AddCard'
 import Deck from './Deck'
 import Quiz from './Quiz'
@@ -22,10 +22,10 @@ const Tabs = {
             tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={35} color={tintColor} />
         },
     },
-    AddDesk: {
-        screen: AddDesk,
+    AddDeck: {
+        screen: AddDeck,
         navigationOptions: {
-            tabBarLabel: 'Add Desk',
+            tabBarLabel: 'Add Deck',
             tabBarIcon: ({ tintColor }) => <MaterialIcons name='add-box' size={35} color={tintColor} />
         },
     },
@@ -74,8 +74,10 @@ const Stack = createAppContainer(createStackNavigator({
       screen: AddCard,
       navigationOptions: {
         headerTintColor: white,
+        title: 'Add Card',
         headerStyle: {
           backgroundColor: purple,
+          marginTop: Platform.OS === 'ios' ? -50 : -25
         }
       },
     },
