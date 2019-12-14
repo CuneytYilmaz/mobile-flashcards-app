@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from './reducers'
@@ -6,6 +6,7 @@ import middleware from './middleware'
 import AppNavigator from './components/AppNavigator'
 import Constants from 'expo-constants'
 import { purple } from './utils/colors'
+import { setLocalNotification } from './utils/notifications'
 import { 
   StyleSheet, 
   View,
@@ -20,16 +21,21 @@ function AppStatusBar({ backgroundColor, ...props }) {
   )
 }
 
-export default function App() {
-  return (
-    <Provider store={ createStore(reducer, middleware) }>
-        <View style={{flex: 1}}>
-        <AppStatusBar backgroundColor={purple} barStyle='light-content' />
-          <AppNavigator />
-        </View>
-    </Provider>
-    
-  );
+export default class App extends Component {
+  componentDidMount () {
+    setLocalNotification()
+  }
+
+  render () {
+    return (
+      <Provider store={ createStore(reducer, middleware) }>
+          <View style={{flex: 1}}>
+          <AppStatusBar backgroundColor={purple} barStyle='light-content' />
+            <AppNavigator />
+          </View>
+      </Provider> 
+    )
+  }
 }
 
 const styles = StyleSheet.create({

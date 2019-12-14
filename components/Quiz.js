@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Result from './Result'
 import { connect } from 'react-redux'
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
 import {
     View,
     Text,
@@ -22,6 +23,10 @@ class Quiz extends Component {
     }
 
     answer = (answer) => {
+        const { counter } = this.state
+        const { deck } = this.props
+        const questionCount = deck.questions.length
+
         if (answer) {
             this.setState((prevState) => ({
                 counter: prevState.counter + 1,
@@ -33,6 +38,13 @@ class Quiz extends Component {
                 counter: prevState.counter + 1,
                 incorrect: prevState.incorrect + 1
             }))
+        }
+
+        // When the user has completed the quiz, clear local notifications for that day
+        if (counter + 1 === questionCount) {
+            console.log('girdi')
+            clearLocalNotification()
+                .then(setLocalNotification)
         }
     }
 
