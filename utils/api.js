@@ -2,12 +2,12 @@ import { AsyncStorage } from 'react-native'
 
 const DECKS_STORAGE_KEY = 'MobileFlashcards:decks'
 
-export const getDecks = async() => {
+export const _getDecks = async() => {
     const decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
     return JSON.parse(decks)
 }
 
-export const saveDeckTitle = async(title) => {
+export const _saveDeckTitle = async(title) => {
     const deck = {
         title,
         questions: []
@@ -17,5 +17,5 @@ export const saveDeckTitle = async(title) => {
         [title]: deck,
     }))
 
-    return await getDecks()
+    return await _getDecks()
 }

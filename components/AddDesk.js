@@ -24,7 +24,9 @@ class AddDesk extends Component {
 
     handleSubmit = () => {
         const { input } = this.state
-        this.props.dispatch(handleSaveDeckTitle(input))
+        const { dispatch } = this.props
+
+        dispatch(handleSaveDeckTitle(input))
         this.setState({
             input: ''
         })
