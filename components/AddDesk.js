@@ -27,9 +27,7 @@ class AddDesk extends Component {
         const { dispatch } = this.props
 
         dispatch(handleSaveDeckTitle(input))
-        this.setState({
-            input: ''
-        })
+            .then(() => this.setState({ input: '' }))
 
         // Navigate to Deck
     }

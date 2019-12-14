@@ -1,5 +1,5 @@
 import { GET_DECKS } from './types'
-import { _saveDeckTitle, _getDecks, _deleteDeck } from '../utils/api'
+import { _saveDeckTitle, _getDecks, _deleteDeck, _addCardToDeck } from '../utils/api'
 
 export function getDecks (decks) {
     return {
@@ -29,6 +29,15 @@ export function handleInitialData () {
 export function handleDeleteDeck (deckId) {
     return (dispatch) => {
         return _deleteDeck(deckId)
+            .then((decks) => {
+                dispatch(getDecks(decks))
+            })
+    }
+}
+
+export function handleAddCardToDeck (title, card) {
+    return (dispatch) => {
+        return _addCardToDeck(title, card)
             .then((decks) => {
                 dispatch(getDecks(decks))
             })

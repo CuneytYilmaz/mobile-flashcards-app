@@ -7,6 +7,7 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native'
+import { handleAddCardToDeck } from '../actions'
 
 class AddCard extends Component {
     state = {
@@ -27,11 +28,19 @@ class AddCard extends Component {
     }
 
     handleSubmit = () => {
-        // This block should code
+        const { question, answer } = this.state
+        const { deckId, dispatch } = this.props
+        const card = { question, answer }
+
+        dispatch(handleAddCardToDeck(deckId, card))
+            .then(() => this.setState({
+                question: '',
+                answer: '',
+            }))
+
     }
 
     render () {
-        const { deckId } = this.props
         const { question, answer } = this.state
 
         return (
