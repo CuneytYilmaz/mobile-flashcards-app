@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { 
     View, Text 
 } from 'react-native'
 
 class DeckList extends Component {
+    componentDidMount() {
+        
+    }
+
     render () {
         return (
             <View>
@@ -13,4 +18,10 @@ class DeckList extends Component {
     }
 }
 
-export default DeckList
+function mapStateToProps (decks) {
+    return {
+        decks
+    }
+}
+
+export default connect(mapStateToProps)(DeckList)

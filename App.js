@@ -2,6 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from './reducers'
+import middleware from './middleware'
 import AppNavigator from './components/AppNavigator'
 import Constants from 'expo-constants'
 import { purple } from './utils/colors'
@@ -21,7 +22,7 @@ function AppStatusBar({ backgroundColor, ...props }) {
 
 export default function App() {
   return (
-    <Provider store={ createStore(reducer) }>
+    <Provider store={ createStore(reducer, middleware) }>
         <View style={{flex: 1}}>
         <AppStatusBar backgroundColor={purple} barStyle='light-content' />
           <AppNavigator />
