@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions'
+import { lightPurp, gray } from '../utils/colors'
 import { 
     View, 
     Text,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    StyleSheet,
+    Platform
 } from 'react-native'
 
 class DeckList extends Component {
@@ -27,9 +30,10 @@ class DeckList extends Component {
             <TouchableOpacity
                 key={title}
                 onPress={() => this.handlePress(title)}
+                style={styles.deck}
             >
-                <Text>{title}</Text>
-                <Text>{questions.length} cards</Text>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.cardCount}>{questions.length} cards</Text>
             </TouchableOpacity>
         )
     }
@@ -45,7 +49,7 @@ class DeckList extends Component {
         const { decks } = this.props
 
         return (
-            <View style={{ flex: 1 }}>
+            <View style={styles.container}>
                 {decks !== null &&
                     <FlatList 
                         data ={ Object.values(decks) }
@@ -57,6 +61,31 @@ class DeckList extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: lightPurp,
+        alignItems: 'center',
+    },
+    deck: {
+        padding: 20,
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: Platform.OS === 'ios' ? 35 : 20,
+        alignItems: 'center'
+    },
+    title: {
+        flex:1,
+        fontSize: 35,
+        marginBottom: 7,
+    },
+    cardCount: {
+        flex: 1,
+        fontSize: 17,
+        color: gray,
+    }
+})
 
 function mapStateToProps (decks) {
     return {

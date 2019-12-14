@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { purple } from '../utils/colors'
+import { purple, test } from '../utils/colors'
 import { handleSaveDeckTitle } from '../actions'
 import { connect } from 'react-redux'
 import {
