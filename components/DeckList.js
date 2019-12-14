@@ -43,7 +43,6 @@ class DeckList extends Component {
 
     render () {
         const { decks } = this.props
-        console.log('render DeckList;',decks)
 
         return (
             <View style={{ flex: 1 }}>
