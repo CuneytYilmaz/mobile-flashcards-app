@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions'
 import { 
-    View, Text 
+    View, 
+    Text,
+    FlatList,
+    TouchableOpacity
 } from 'react-native'
 
 class DeckList extends Component {
@@ -17,13 +20,39 @@ class DeckList extends Component {
             .then(() => this.setState({ ready: true }))
     }
 
+    renderItem = ({ item }) => {
+        const { title, questions } = item
+
+        return (
+            <TouchableOpacity
+                key={title}
+                onPress={() => this.handlePress(title)}
+            >
+                <Text>{title}</Text>
+                <Text>{questions.length} cards</Text>
+            </TouchableOpacity>
+        )
+    }
+
+    handlePress = (title) => {
+        this.props.navigation.navigate(
+            'Deck',
+            { deskId: title}
+        )
+    }
+
     render () {
         const { decks } = this.props
 
         return (
             <View style={{ flex: 1 }}>
                 {decks !== null &&
-                Object.values(decks).map((item)=><Text>{item.title}</Text>)}
+                    <FlatList 
+                        data ={ Object.values(decks) }
+                        renderItem = { this.renderItem }
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                }
             </View>
         )
     }
