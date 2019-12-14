@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     cardCount: {
         fontSize: 17,
         color: gray,
-    }
+    },
 })
 
 function mapStateToProps (decks) {

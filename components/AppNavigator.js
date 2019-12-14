@@ -66,6 +66,7 @@ const Stack = createAppContainer(createStackNavigator({
         headerTintColor: white,
         headerStyle: {
           backgroundColor: purple,
+          marginTop: Platform.OS === 'ios' ? -50 : -25
         }
       },
     },
