@@ -82,8 +82,8 @@ class Quiz extends Component {
 
         if (questionCount === 0) {
             return (
-                <View>
-                    <Text>There is no question</Text>
+                <View style={styles.noQuestionContainer}>
+                    <Text style={{ flex: 0.5, fontSize: 17, fontWeight: 'bold' }}>There is no question in this deck!</Text>
                 </View>
             )
         }
@@ -143,7 +143,7 @@ class Quiz extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: lightPurp,  
+        backgroundColor: lightPurp,
     },
     textContainer: {
         flex: 1,
@@ -209,6 +209,12 @@ const styles = StyleSheet.create({
         color: white,
         fontSize: 15,
     },
+    noQuestionContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center', 
+        backgroundColor: lightPurp,
+    }
 })
 
 function mapStateToProps (decks, { navigation }) {
