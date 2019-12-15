@@ -31,9 +31,10 @@ class AddDesk extends Component {
         dispatch(handleSaveDeckTitle(input))
             .then(() => this.setState({ input: '' }))
 
-        this.props.navigation.dispatch(NavigationActions.back({
-            key: 'AddDeck'
-        }))
+        this.props.navigation.navigate(
+            'Deck',
+            { deckId: input }
+        )
     }
 
     render () {
