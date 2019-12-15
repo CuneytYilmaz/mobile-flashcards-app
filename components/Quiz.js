@@ -103,7 +103,7 @@ class Quiz extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.textContainer}>
-                    <Text style={styles.counter}>{counter} / {questionCount}</Text>
+                    <Text style={styles.counter}>{counter + 1} / {questionCount}</Text>
                     <View style={styles.headerContainer}>
                         <Text style={styles.textQA}>{showAnswer === true 
                                 ? deck.questions[counter].answer
