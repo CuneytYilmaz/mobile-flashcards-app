@@ -70,6 +70,7 @@ class AddCard extends Component {
                     <TouchableOpacity
                         onPress={this.handleSubmit}
                         style={Platform.OS === 'ios' ? styles.iosBtn : styles.androidBtn}
+                        disabled={question === '' || answer === ''}
                     >
                         <Text style={styles.btnText}>Submit</Text>
                     </TouchableOpacity>

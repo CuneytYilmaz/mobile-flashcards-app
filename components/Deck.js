@@ -134,7 +134,6 @@ const styles = StyleSheet.create({
         marginLeft: 40,
         marginRight: 40,
         marginBottom: 20,
-        alignSelf: 'flex-end',
         justifyContent: 'center',
     },
     btnAddBackground: {

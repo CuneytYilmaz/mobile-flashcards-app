@@ -85,8 +85,10 @@ const Stack = createAppContainer(createStackNavigator({
       screen: Quiz,
       navigationOptions: {
         headerTintColor: white,
+        title: 'Quiz',
         headerStyle: {
           backgroundColor: purple,
+          marginTop: Platform.OS === 'ios' ? -50 : -25
         }
       },
     },

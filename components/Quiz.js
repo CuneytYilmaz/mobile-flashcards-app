@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import Result from './Result'
 import { connect } from 'react-redux'
 import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
+import { lightPurp, red, lightRed, green, white } from '../utils/colors'
 import {
     View,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    StyleSheet,
+    Platform
 } from 'react-native'
 
 class Quiz extends Component {
@@ -42,7 +45,6 @@ class Quiz extends Component {
 
         // When the user has completed the quiz, clear local notifications for that day
         if (counter + 1 === questionCount) {
-            console.log('girdi')
             clearLocalNotification()
                 .then(setLocalNotification)
         }
@@ -99,39 +101,124 @@ class Quiz extends Component {
         }
 
         return (
-            <View>
-                <Text>{counter} / {questionCount}</Text>
-                <Text>{showAnswer === true 
-                        ? deck.questions[counter].question
-                        : deck.questions[counter].answer }</Text>
-                <TouchableOpacity
-                    onPress={this.toggleCard}
-                >
-                    <Text>
-                        {showAnswer === true ? 'Question' : 'Answer'}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => this.answer(true)}
-                >
-                    <Text>Correct</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => this.answer(false)}
-                >
-                    <Text>Incorrect</Text>
-                </TouchableOpacity>
+            <View style={styles.container}>
+                <View style={styles.textContainer}>
+                    <Text style={styles.counter}>{counter} / {questionCount}</Text>
+                    <View style={styles.headerContainer}>
+                        <Text style={styles.textQA}>{showAnswer === true 
+                                ? deck.questions[counter].answer
+                                : deck.questions[counter].question }</Text>
+                        <TouchableOpacity
+                            onPress={this.toggleCard}
+                        >
+                            <Text
+                                style={styles.btnAnswer}
+                            >
+                                {showAnswer === true ? 'Question' : 'Answer'}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    
+                </View>
+                <View style={styles.btnContainer}>
+                    <TouchableOpacity
+                        onPress={() => this.answer(true)}
+                        style={ Platform.OS === 'ios' ? [styles.iosBtn, styles.btnCorrect] : [styles.androidBtn, styles.btnCorrect] }
+                    >
+                        <Text style={styles.btnText}>Correct</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => this.answer(false)}
+                        style={ Platform.OS === 'ios' ? [styles.iosBtn, styles.btnIncorrect] : [styles.androidBtn, styles.btnIncorrect] }
+                    >
+                        <Text style={styles.btnText}>Incorrect</Text>
+                    </TouchableOpacity>
+                </View>
+                
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: lightPurp,  
+    },
+    textContainer: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    headerContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    btnContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    counter: {
+        alignSelf: 'flex-start',
+        margin: 20,
+        fontSize: Platform.OS === 'ios' ? 23 : 20,
+    },
+    textQA: {
+        fontSize: 55,
+        textAlign: 'center',
+        alignItems: 'center',
+        padding: 10,
+    },
+    btnAnswer: {
+        color: red,
+        marginTop: 8,
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    iosBtn: {
+        padding: 10,
+        borderRadius: 7,
+        height: 65,
+        width: 300,
+        marginLeft: 40,
+        marginRight: 40,
+        marginBottom: 20,
+        justifyContent: 'center',
+    },
+    androidBtn: {
+        padding: 10,
+        paddingLeft: 30,
+        paddingRight: 30,
+        height: 60,
+        width: 300,
+        borderRadius: 2,
+        marginLeft: 40,
+        marginRight: 40,
+        marginBottom: 20,
+        justifyContent: 'center',
+    },
+    btnCorrect: {
+        backgroundColor: green,
+    },
+    btnIncorrect: {
+        backgroundColor: lightRed,
+    },
+    btnText: {
+        textAlign: 'center',
+        color: white,
+        fontSize: 15,
+    },
+})
 
 function mapStateToProps (decks, { navigation }) {
     const { deckId } = navigation.state.params
 
     return {
         deckId,
-        deck: decks[deckId],
+        deck: decks
+            ? decks[deckId]
+            : null,
     }
 }
 
